@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book an Appointment | BraidedbyDara</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+font-family: Arial, sans-serif;
+background-color: #9c5504;
+color: #ffffff;
+padding: 20px;
+margin: 0;
+        }
+        h1, h2 {
+      color: #000000;
+      text-align: center;
+    }
+    form, .calendar-section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(107, 1, 1, 0.1);
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 16px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type=submit] {
+      background-color: #b76e79;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    input[type=submit]:hover {
+      background-color: #a25766;
+    }
+    iframe {
+      width: 100%;
+      height: 700px;
+      border: none;
+      margin-top: 20px;
+    }
+    @media (max-width: 600px) {
+      form, .calendar-section {
+        margin: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Book Your Appointment</h1>
+  <p style="text-align:center;">Choose a booking option below to schedule your appointment.</p>
+
+  <!-- Option A: Custom Form using Formspree -->
+  <form action="https://formspree.io/f/xrbprblw" method="POST">
+    <h2>Option A: Booking Form</h2>
+    
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="date">Preferred Appointment Date:</label>
+    <input type="date" id="datePicker" name="date" required>
+
+    <label for="style">Select Braiding Style:</label>
+    <select id="style" name="style" required>
+      <option value="">-- Choose a Style --</option>
+      <option value="knotless">Knotless Braids</option>
+      <option value="box">Twists</option>
+      <option value="cornrows">Cornrows</option>
+      <option value="custom">Custom Style</option>
+    </select>
+
+    <label for="notes">Additional Notes (optional):</label>
+    <textarea id="notes" name="notes" rows="4" placeholder="Tell me anything specific you'd like..."></textarea>
+
+    <!-- Hidden redirect input (update with the live URL later) -->
+    <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you.html">
+
+    <input type="submit" value="Book Now">
+  </form>
+
+  <!-- JavaScript for blocking specific unavailable dates -->
+  <script>
+    const datePicker = document.getElementById("datePicker");
+
+    // Define your unavailable dates (format: "yyyy-mm-dd")
+    const unavailableDates = [
+      "2025-04-10",
+      "2025-04-12",
+      "2025-04-15"
+    ];
+
+    datePicker.addEventListener("input", function () {
+      if (unavailableDates.includes(this.value)) {
+        alert("This date is already booked. Please choose another.");
+        this.value = "";
+      }
+    });
+
+    // Set minimum selectable date to today
+    const today = new Date().toISOString().split("T")[0];
+    datePicker.setAttribute("min", today);
+  </script>
+
+  <!-- Option B: Calendly Embed -->
+  <div class="calendar-section">
+    <h2>Option B: Live Calendar Booking</h2>
+    <p style="text-align:center;">Check live availability and book an appointment instantly.</p>
+    
+    <!-- Replace this src with your actual Calendly embed link -->
+    <iframe src="https://calendly.com/adebiyiafoladara/braiding-appointment" title="Calendly Booking"></iframe>
+  </div>
+
+</body>
+</html>
